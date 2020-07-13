@@ -4,8 +4,9 @@ Array.prototype.mySort = function() {
     var len = arr.length;
     for(var i = 0; i < len; i++) {
         for(var j = 0; j < len - i - 1; j++) {
-            if(args[0] && typeof args[0] == 'function') {
-                if(args[0](arr[j], arr[j+1]) > 0){
+            var func = args[0];
+            if(func && typeof func == 'function') {
+                if(func.call(args, arr[j], arr[j+1]) > 0){
                   [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
                 }
             } else {
