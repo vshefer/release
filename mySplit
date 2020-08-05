@@ -25,7 +25,7 @@ function mySplit() {
     var splitStr
 
     for(var indIndex = 0; indIndex <= blockIndexArr.length; indIndex++) {
-        if(splitStrArr.length >= limit) {
+        if(limit !== undefined && splitStrArr.length >= limit) {
             break
         }
         if(indIndex === blockIndexArr.length) {
