@@ -1,0 +1,44 @@
+function mySplit() {
+    var args = Array.from(arguments)
+    var block = args[0]
+    var limit = args[1]
+    var blockLength = block.length
+
+    console.log('this:', this)
+    var str = this
+    var len = str.length
+    var blockIndexArr = []
+    for(var i = 0; i < len; i++) {
+        if(i + blockLength > len) {
+            break
+        } // 超出则跳出
+
+        if(isFit(str.slice(i, i + blockLength), block)) {
+            blockIndexArr.push(i)
+        }
+    }
+
+    var splitStrArr = []
+    var start = 0
+    var end = str.length
+    var blockIndex
+    var splitStr
+
+    for(var indIndex = 0; indIndex <= blockIndexArr.length; indIndex++) {
+        if(indIndex === blockIndexArr.length) {
+            end = len // 截取block完后取最后的部分
+        } else {
+            blockIndex = blockIndexArr[indIndex]
+            end = blockIndex
+        }
+        splitStr = str.slice(start, end)
+        splitStrArr.push(splitStr)
+        start = blockIndex + blockLength
+    }
+
+    function isFit(arrow, target) {
+        return arrow === target // 暂时，可扩展支持正则
+    }
+
+    return splitStrArr
+}
