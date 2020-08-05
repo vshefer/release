@@ -20,11 +20,14 @@ function mySplit() {
 
     var splitStrArr = []
     var start = 0
-    var end = str.length
+    var end = len
     var blockIndex
     var splitStr
 
     for(var indIndex = 0; indIndex <= blockIndexArr.length; indIndex++) {
+        if(splitStrArr.length >= limit) {
+            break
+        }
         if(indIndex === blockIndexArr.length) {
             end = len // 截取block完后取最后的部分
         } else {
