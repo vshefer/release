@@ -1,6 +1,5 @@
 var random = function() {
-    var today = new Date();
-    var seed = today.getTime();
+    var seed = new Date().getTime();
     seed = ( seed * 9301 + 49297 ) % 233280;
     return seed / ( 233280.0 );
 };
