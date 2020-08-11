@@ -1,33 +1,37 @@
 var myArr = function() {
+    Object.assign(this, [...arguments])
+
     var args = Array.from(arguments);
     
     var len = args.length;
-    
-    for(var i = 0; i < len; i++) {
-        this[i] = args[i];
-    }
-    
-    var theThis = arguments.callee;
 
     this.length = len;
 
-    theThis.prototype.join = () => {
-        return args.join(',');
-    }
-    
+    var theThis = arguments.callee;
 
-     this[Symbol.iterator] = function () {
-//          yield args[index];
-//          index++;
+//     theThis.prototype.join = () => {
+//         return [...this].join(',');
+//     }
+    
+//      Object.assign(theThis.prototype, Array.prototype);
+    var funcKey = ['copyWithin', 'entries', 'join']; // TODO
+    for(key of funcKey) {
+        theThis.prototype[key] = Array.prototype[key].bind(this)
+    }
+     this[Symbol.iterator] = function* () {
         var index = 0;
-        var next = () => {
-            return {
-                value: args[index],
-                done: index++ === len
-            }
+        while(index < len) {
+         yield args[index++];
         }
-        return {
-            next
-        }
+//         var index = 0;
+//         function next() {
+//             return {
+//                 value: args[index],
+//                 done: index++ === len
+//             }
+//         }
+//         return {
+//             next
+//         }
      }
 }
