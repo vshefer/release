@@ -21,35 +21,39 @@ var myPromise = function() {
     func(resolveFunc, rejectFunc)
 
     arguments.callee.prototype.then = function() {
-        var thenFunc = Array.from(arguments)[0]
-        if(!thenFunc) {
+        var args = [...arguments]
+        var resolveFunc = args[0]
+        var rejectFunc = args[1]
+        if(!resolveFunc) {
             return
         }
+        var res
         if(_this.state === 'ready') {
             setTimeout(()=>{
                 arguments.callee.apply(this, arguments)
             }, 50) // 每50ms执行一次
         } else if(_this.state === 'reject') {
-            return // donothing
+            res = rejectFunc(_this.msg)
         } else {
-            thenFunc(_this.msg)
+            res = resolveFunc(_this.msg)
         }
+        return res 
+        // todo
+        new myPromise(resolve => {
+        setTimeout(() => {
+            resolve('hello')
+            }, 2000)
+        }).then(val => {
+            console.log(val) //  参数val = 'hello'
+            return new Promise(resolve => {
+            setTimeout(() => {
+                resolve('world')
+            }, 2000)
+            })
+        }).then(val => {
+            console.log(val) // 参数val = 'world'
+        })
     }
 
-    arguments.callee.prototype.reject = function() {
-        var thenFunc = Array.from(arguments)[1]
-        if(!thenFunc) {
-            return
-        }
-        if(_this.state === 'ready') {
-            setTimeout(()=>{
-                arguments.callee.apply(this, arguments)
-            }, 50)
-        } else if(_this.state === 'ready') {
-            return // donothing
-        } else {
-            thenFunc(_this.msg)
-        }
-    }
     return this;
 }
