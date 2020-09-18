@@ -12,3 +12,17 @@ function* dfsAndPlat(arr) {
         }
     }
 }
+// var obj1 = [{
+//     key: 1,
+//     children: [{
+//         key: 3,
+//         children: [{key: 31}]
+//     },{
+//         key: 4,
+//         children: [{key: 41}, {key: 42, name: 'k'}]
+//     }]
+// }, {
+//     key: 5,
+//     children: []
+// }]
+// var arr = [...dfs(obj1)]
