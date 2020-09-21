@@ -1,6 +1,9 @@
 var myRepeat = function(count) {
     var realCount = parseInt(count);
     if(Number.isNaN(realCount) || !realCount) {
+        if(!Number.isFinite(count)) {
+            throw new RangeError('Invalid count value');
+        }
         return '';
     }
     if(realCount < 0) {
