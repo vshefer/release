@@ -11,7 +11,7 @@ function myEvery() {
     for(var index = 0; index < theLen; index++) {
         var theCItem = theOne[index];
 
-        var result = func.call(null, theCItem, index, theOne);
+        var result = func.call(theThis, theCItem, index, theOne);
         if(!result) {
             isPass = false;
             break;
