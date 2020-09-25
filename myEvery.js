@@ -3,7 +3,7 @@ function myEvery() {
     var args = Array.from(arguments);
 
     var func = args[0];
-    var theThis = args[1] || window;
+    var theThis = args[1] || null;
 
     var theLen = theOne.length;
 
@@ -11,7 +11,7 @@ function myEvery() {
     for(var index = 0; index < theLen; index++) {
         var theCItem = theOne[index];
 
-        var result = func.call(theThis, theCItem, index, theOne);
+        var result = func.call(null, theCItem, index, theOne);
         if(!result) {
             isPass = false;
             break;
