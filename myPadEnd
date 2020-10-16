@@ -1,0 +1,21 @@
+var myPadEnd = function() {
+    var args = Array.from(arguments);
+    var theOne = this;
+    var theFunc = arguments.callee;
+    var theLen = theOne.length;
+
+    var endLen = args[0];
+    endLen = endLen < theLen ? theLen: endLen;
+    var fillLen = endLen - theLen;
+
+    var fillStr = args[1] || ' ';
+    var fillStrLen = fillStr.length;
+
+    var theResult = theOne; // 字符串拷贝
+    for(var index = 0; index < fillLen; index++) {
+        var c = fillStrLen ? fillStr[index % fillStrLen] : '';
+        theResult += c;
+    }
+//     return theResult;
+    return theResult.toString();
+}
