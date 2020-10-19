@@ -2,7 +2,7 @@ function myMap() {
     var args = Array.from(arguments);
 //     var funcBase = arguments.callee;
     var func = args[0];
-    var funcArg = args[1] || this;
+    var funcArg = args[1];
     var theOne = this;
 
     var len = this.length;
